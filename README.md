@@ -72,8 +72,7 @@ def find_winner(self, compchoice, userchoice):
         elif self.options.index(userchoice) - self.options.index(compchoice) == 1:
             self.user_wins += 1
             print('You won')
-#above two elif statements have been worked out as the winning subtractions for the option indexes where rock=[0] paper=[1] scissors=[2]
-#r-s=-2, p-r & s-p=-1
+            
         else:
             self.comp_wins += 1
             print('You lost')
