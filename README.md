@@ -24,3 +24,28 @@ def __init__(self):
         self.tie = 0
         self.plays = 0
 ```
+
+### Defining both the choices
+
+- This section will focus on the code which defined both the computer and user choices.
+
+#### Defining the computer choice
+
+- The computer choice was defined as a random choice from the list of 3 options which was defined in the initialiser. A statement was printed which displayed the computers choice in the game. The choice was then returned to close out the class.
+
+```python
+def get_computer_choice(self):
+        compchoice = random.choice(self.options)
+        print('The computer picks', compchoice)
+        return compchoice
+```
+
+#### Defining the user choice
+
+- The user choice made use of the input function. The .lower() function was then used to ensure the input was converted into entirely lowercase regardless of what case the original input was. This was done as lowercase seemed the most friendly case for inputs, so the list was made all lowercase too. Again, this variable was returned to close out the class.
+
+```python
+def get_user_choice(self):
+        userchoice = input('You choose: ').lower()
+        return userchoice
+```        
