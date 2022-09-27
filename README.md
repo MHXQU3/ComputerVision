@@ -48,4 +48,35 @@ def get_computer_choice(self):
 def get_user_choice(self):
         userchoice = input('You choose: ').lower()
         return userchoice
-```        
+```    
+
+### Finding the winner
+
+- This part of the code is where the winner is found every match. The first part of the code is checking for a valid input. If the input is not in the list of options then the input is not taken and an input is asked for again. Index calculation is utilised to work out who the winner is. Based on the indexes in the list {rock,paper,scissors}, rock is 0, paper is 1 and scissors is 2. rock beats scissors, so the calculation would be 0-2 = -2, paper beats rock and scissors beats paper which gives the calculations of 1-0 and 2-1, both of which result in 1. These calculations are done with the user input being the first variable in the calculation, so if -2 or 1 was the output of the calculation, the user wins, the win counter is increased by 1 and a statement would be displayed showing so. if the user input is equal to the computer input then the game would result in a draw, the draw counter is increased by 1 and a statement would be printed showing so and if neither of these conditions are ment then the only other outcome possible would be that the user has lost the game in which case the loss counter is increased by 1 and a statement is displayed showing the user has lost. 
+
+```python
+def find_winner(self, compchoice, userchoice): 
+        self.plays += 1
+
+        if userchoice not in self.options:
+            print('Your input is invalid')
+        
+        elif compchoice == userchoice:
+            self.tie += 1
+            print('It is a draw')
+        
+        elif self.options.index(userchoice) - self.options.index(compchoice) == -2:
+            self.user_wins += 1
+            print('You won')
+
+        elif self.options.index(userchoice) - self.options.index(compchoice) == 1:
+            self.user_wins += 1
+            print('You won')
+#above two elif statements have been worked out as the winning subtractions for the option indexes where rock=[0] paper=[1] scissors=[2]
+#r-s=-2, p-r & s-p=-1
+        else:
+            self.comp_wins += 1
+            print('You lost')
+        
+        print('You currently have:', self.user_wins, 'wins and', self.comp_wins, 'losses and', self.tie, 'draws')
+```
