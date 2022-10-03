@@ -1,5 +1,5 @@
-# ComputerVision
- Repo for the AI Core computer vision project
+# Computer Vision Project
+ Repo for the AI Core computer vision project: The manual & camera rock, paper & scissors game.
 
 ## Preparation
 
