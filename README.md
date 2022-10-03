@@ -78,4 +78,30 @@ def find_winner(self, compchoice, userchoice):
             print('You lost')
         
         print('You currently have:', self.user_wins, 'wins and', self.comp_wins, 'losses and', self.tie, 'draws')
+        
 ```
+
+### Game logic
+
+- The next step is to code how the game will run. This game is a first to 3, which means that unless either the user or the computer has 3 wins, the game will continue to run. This means that both the choices and the find winner class will be called. When the user or the computer reaches 3 wins, a statement will be shown stating that the user has either won or lost respectively.
+
+```python
+def play_game():
+    game = RPS()
+    while game.user_wins < 3 or game.comp_wins < 3:
+        human_choice = game.get_user_choice()
+        computer_choice = game.get_computer_choice()
+        game.find_winner(computer_choice, human_choice)
+   
+        if game.user_wins == 3:
+            print("You have won the best of 3")
+            exit() 
+            
+        elif game.comp_wins == 3:
+            print("You have lost the best of 3")
+            exit() 
+            
+```
+## Camera RPS game
+
+- This version of the rock, paper & scissors game uses the camera and image recognition AI to input the users choice via a variety of poses. 
