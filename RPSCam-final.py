@@ -12,6 +12,10 @@ import time
 
 
 class RPS():
+    ''' A rock paper scissors class where the user is using a trained model and their device camera to input their options. 
+    The user mimics the shapes of a rock, paper and scissors that they would use in a real life game and the trained model has learned what these look like
+    and can recognise them and use them as the inputted options. As in the manual version of RPS, the computer still picks its options from a list of choices
+    '''
 
     def __init__(self):
         self.options = ['Rock', 'Paper', 'Scissors', 'Nothing']
@@ -21,7 +25,7 @@ class RPS():
         self.plays = 0
         self.compchoice = []
         self.userchoice = []
-        self.model = load_model('keras_model.h5')
+        self.model = load_model('keras_model.h5') #Loads the trained model
         self.cap = cv2.VideoCapture(0)
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
@@ -41,6 +45,12 @@ class RPS():
 
 
     def get_prediction(self):
+        '''
+        This is where the user makes their choice. They pick either rock, paper or scissors using their hand and this is what is 
+        selected as the user option. They also have to do this within a time constraint as shown in both the previous function 
+        and the time.time < end_time here. The prediction comes from the factor of it estimating the highest probability of what 
+        the user selected and the option returned as a string
+        '''
         end_time = time.time() + 5
         while time.time() < end_time:
             ret, frame = self.cap.read()
@@ -63,17 +73,17 @@ class RPS():
         return user_choice
         
     def find_winner(self, compchoice, userchoice): 
-        self.plays += 1
+        self.plays += 1 #adds one to the game tally
 
         if userchoice not in self.options:
-            print('Your input is invalid')
+            print('Your input is invalid') #determines if the users option is one that was in the list
 
         elif self.options.index(userchoice) == 3:
-            print('You did not display an symbol') 
+            print('You did not display an symbol')  #determines if the user even showed a corresponding symbol at all
         
         elif compchoice == userchoice:
             self.tie += 1
-            print('It is a draw')
+            print('It is a draw') #first checks to see if there is a tie
         
         elif self.options.index(userchoice,0,-1) - self.options.index(compchoice,0,-1) == -2:
             self.user_wins += 1
@@ -87,7 +97,7 @@ class RPS():
 #above lif statements will only run for options that are rock, paper & scissors
         else:
             self.comp_wins += 1
-            print('You lost')
+            print('You lost') #only other option is a loss
         
         print('You currently have:', self.user_wins, 'wins and', self.comp_wins, 'losses and', self.tie, 'draws')
         pass
@@ -101,11 +111,11 @@ def play_game():
         game.find_winner(computer_choice, human_choice)
    
         if game.user_wins == 3:
-            print("You have won the best of 3")
+            print("You have won the first to 3")
             exit() 
             
         elif game.comp_wins == 3:
-            print("You have lost the best of 3")
+            print("You have lost the first to 3")
             exit() 
 
 # After the loop release the cap object
